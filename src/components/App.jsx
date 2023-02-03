@@ -15,7 +15,8 @@ class App extends Component {
 
   addContact = ({ name, number }) => {
     if (this.isDublicate(name, number)) {
-      return Notify.failure(`${name} or ${number} is already in contacts.`);
+      Notify.failure(`${name} or ${number} is already in contacts.`);
+      return false;
     }
     this.setState(({ contacts }) => {
       const newContact = {
@@ -25,6 +26,7 @@ class App extends Component {
       };
       return { contacts: [newContact, ...contacts] };
     });
+    return true;
   };
 
   isDublicate = (name, number) => {
